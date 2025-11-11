@@ -1,1 +1,1 @@
-
+// rules for vibecoding
