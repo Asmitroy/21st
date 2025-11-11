@@ -48,4 +48,4 @@ Add a poetic hover:
 
 “Every word finds its time.”
 
-💡 Significance: Love deepens not all at once, but as she grows into it.
+//database connected, need shifting to supabase
