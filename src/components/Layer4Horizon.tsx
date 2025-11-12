@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { promises } from '../data/content';
 import { Circle } from 'lucide-react';
 
-export default function Layer4Horizon() {
+interface Props {
+  onComplete?: () => void;
+}
+
+export default function Layer4Horizon({ onComplete }: Props) {
   const [showFinal, setShowFinal] = useState(false);
   const [circlesMerged, setCirclesMerged] = useState(false);
 
@@ -140,11 +144,22 @@ export default function Layer4Horizon() {
             <p className="text-xl text-gray-700 italic mb-4">
               This journey has no end.
             </p>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 mb-12">
               Because you are my constant,<br />
               my light,<br />
               my home.
             </p>
+            {onComplete && (
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.5 }}
+                onClick={onComplete}
+                className="bg-gradient-to-r from-purple-400 to-pink-500 text-white px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all text-lg"
+              >
+                Read My Letters
+              </motion.button>
+            )}
           </motion.div>
         </motion.div>
       )}

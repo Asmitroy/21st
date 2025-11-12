@@ -1,4 +1,4 @@
-import { Quality, Memory } from '../types';
+import { Quality, Memory, SilencePoem } from '../types';
 
 export const qualities: Quality[] = [
   {
@@ -93,4 +93,31 @@ export const promises = [
   'I promise to build a thousand little worlds with you.',
   'I promise to choose you, every single day.',
   'I promise that this—us—is forever.',
+];
+
+export const silencePoems: SilencePoem[] = [
+  {
+    id: 'silence-1',
+    content: 'You stayed.\nThank you for listening to the quiet.',
+  },
+  {
+    id: 'silence-2',
+    content: 'In stillness, we find what words cannot hold.\nYou were here.',
+  },
+  {
+    id: 'silence-3',
+    content: 'Silence is not emptiness—it\'s where hearts speak loudest.\nYou heard.',
+  },
+  {
+    id: 'silence-4',
+    content: 'Every breath you breathe is a promise.\nI feel it, even in the quiet.',
+  },
+  {
+    id: 'silence-5',
+    content: 'The world fades, but you remain.\nAlways.',
+  },
+  {
+    id: 'silence-6',
+    content: 'In these quiet moments, I see forever.\nWith you.',
+  },
 ];

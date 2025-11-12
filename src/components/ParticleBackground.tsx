@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface Particle {
   x: number;
@@ -16,30 +16,49 @@ export default function ParticleBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Handle devicePixelRatio so the canvas looks crisp on high-DPI screens
+    const dpr = window.devicePixelRatio || 1;
+    const resizeCanvas = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resizeCanvas();
 
     const particles: Particle[] = [];
-    const particleCount = 50;
+    // Slightly higher particle count for better visibility
+    const particleCount = 80;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.1,
+        // increase velocity a bit so motion is more apparent
+        vx: (Math.random() - 0.5) * 0.9,
+        vy: (Math.random() - 0.5) * 0.9,
+        size: Math.random() * 2.5 + 1,
+        opacity: Math.random() * 0.7 + 0.2,
       });
     }
 
     let animationFrameId: number;
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // clear using CSS pixel size (ctx already scaled by dpr)
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width / (window.devicePixelRatio || 1),
+        canvas.height / (window.devicePixelRatio || 1)
+      );
 
       particles.forEach((particle) => {
         particle.x += particle.vx;
@@ -60,15 +79,14 @@ export default function ParticleBackground() {
     animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      resizeCanvas();
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -76,7 +94,8 @@ export default function ParticleBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
+      // ensure canvas sits behind everything else
+      style={{ zIndex: -1, width: "100%", height: "100%" }}
     />
   );
 }
