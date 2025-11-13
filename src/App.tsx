@@ -9,6 +9,7 @@ import ParticleBackground from "./components/ParticleBackground";
 import AudioPlayer from "./components/AudioPlayer";
 import SilenceReward from "./components/SilenceReward";
 import SequenceTransition from "./components/SequenceTransition";
+import WhisperField from "./components/WhisperField";
 import { useStillnessDetector } from "./hooks/useStillnessDetector";
 import { generateUserIdentifier } from "./utils/unlockUtils";
 import {
@@ -253,6 +254,18 @@ function App() {
                   onLetterOpened={handleLetterOpened}
                   onLetterBookmarked={handleLetterBookmarked}
                 />
+              </motion.div>
+            )}
+            {currentLayer === 5 && (
+              <motion.div
+                key="layer6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+              >
+                {/* WhisperField: ambient background for final layer (Layer 6) */}
+                <WhisperField count={18} />
               </motion.div>
             )}
           </>

@@ -1,68 +1,75 @@
-import { Quality, Memory, SilencePoem } from '../types';
+import { Quality, Memory, SilencePoem } from "../types";
 
 export const qualities: Quality[] = [
   {
-    id: 'honest',
-    title: 'Honest',
-    description: 'Your honesty isn\'t blunt; it\'s the mirror that keeps me true.',
+    id: "honest",
+    title: "Honest",
+    description:
+      "Your honesty isn't blunt; it's the mirror that keeps me true.",
   },
   {
-    id: 'hardworking',
-    title: 'Hardworking',
-    description: 'You pour yourself into everything, and it shows in the quiet strength of who you are.',
+    id: "hardworking",
+    title: "Hardworking",
+    description:
+      "You pour yourself into everything, and it shows in the quiet strength of who you are.",
   },
   {
-    id: 'relentless',
-    title: 'Relentless',
-    description: 'You don\'t give up. You bend, you adapt, but you never break.',
+    id: "relentless",
+    title: "Relentless",
+    description: "You don't give up. You bend, you adapt, but you never break.",
   },
   {
-    id: 'dependable',
-    title: 'Dependable',
-    description: 'When the world feels uncertain, you are the one constant I can always trust.',
+    id: "dependable",
+    title: "Dependable",
+    description:
+      "When the world feels uncertain, you are the one constant I can always trust.",
   },
   {
-    id: 'optimistic',
-    title: 'Optimistic',
-    description: 'Even in darkness, you find a sliver of light and hold it like it\'s the whole sky.',
+    id: "optimistic",
+    title: "Optimistic",
+    description:
+      "Even in darkness, you find a sliver of light and hold it like it's the whole sky.",
   },
   {
-    id: 'kind',
-    title: 'Kind',
-    description: 'Your kindness isn\'t loud or performative—it\'s in the small things that matter most.',
+    id: "kind",
+    title: "Kind",
+    description:
+      "Your kindness isn't loud or performative—it's in the small things that matter most.",
   },
 ];
 
 export const memories: Memory[] = [
   {
-    id: 'first-meeting',
-    title: 'First Meeting',
-    date: 'The Beginning',
-    description: 'The moment our worlds collided, and everything changed.',
+    id: "first-meeting",
+    title: "First Meeting",
+    date: "The Beginning",
+    description: "The moment our worlds collided, and everything changed.",
     position: { x: 20, y: 30 },
   },
   {
-    id: 'shared-silence',
-    title: 'Shared Silence',
-    description: 'That night we said nothing, but understood everything.',
+    id: "shared-silence",
+    title: "Shared Silence",
+    description: "That night we said nothing, but understood everything.",
     position: { x: 70, y: 40 },
   },
   {
-    id: 'random-night',
-    title: 'Random Night',
-    description: 'Just another evening that became extraordinary simply because you were there.',
+    id: "random-night",
+    title: "Random Night",
+    description:
+      "Just another evening that became extraordinary simply because you were there.",
     position: { x: 40, y: 70 },
   },
   {
-    id: 'promise',
-    title: 'The Promise',
-    description: 'When words became commitments, and commitments became us.',
+    id: "promise",
+    title: "The Promise",
+    description: "When words became commitments, and commitments became us.",
     position: { x: 60, y: 60 },
   },
   {
-    id: 'challenge',
-    title: 'Through Challenges',
-    description: 'We faced storms together and came out stronger on the other side.',
+    id: "challenge",
+    title: "Through Challenges",
+    description:
+      "We faced storms together and came out stronger on the other side.",
     position: { x: 30, y: 50 },
   },
 ];
@@ -88,36 +95,51 @@ Forever, in every small thing.
 Yours always.`;
 
 export const promises = [
-  'I promise to see you when the world looks away.',
-  'I promise to hold your light when you forget how bright you shine.',
-  'I promise to build a thousand little worlds with you.',
-  'I promise to choose you, every single day.',
-  'I promise that this—us—is forever.',
+  "I promise to see you when the world looks away.",
+  "I promise to hold your light when you forget how bright you shine.",
+  "I promise to build a thousand little worlds with you.",
+  "I promise to choose you, every single day.",
+  "I promise that this—us—is forever.",
 ];
 
 export const silencePoems: SilencePoem[] = [
   {
-    id: 'silence-1',
-    content: 'You stayed.\nThank you for listening to the quiet.',
+    id: "silence-1",
+    content: "You stayed.\nThank you for listening to the quiet.",
   },
   {
-    id: 'silence-2',
-    content: 'In stillness, we find what words cannot hold.\nYou were here.',
+    id: "silence-2",
+    content: "In stillness, we find what words cannot hold.\nYou were here.",
   },
   {
-    id: 'silence-3',
-    content: 'Silence is not emptiness—it\'s where hearts speak loudest.\nYou heard.',
+    id: "silence-3",
+    content:
+      "Silence is not emptiness—it's where hearts speak loudest.\nYou heard.",
   },
   {
-    id: 'silence-4',
-    content: 'Every breath you breathe is a promise.\nI feel it, even in the quiet.',
+    id: "silence-4",
+    content:
+      "Every breath you breathe is a promise.\nI feel it, even in the quiet.",
   },
   {
-    id: 'silence-5',
-    content: 'The world fades, but you remain.\nAlways.',
+    id: "silence-5",
+    content: "The world fades, but you remain.\nAlways.",
   },
   {
-    id: 'silence-6',
-    content: 'In these quiet moments, I see forever.\nWith you.',
+    id: "silence-6",
+    content: "In these quiet moments, I see forever.\nWith you.",
   },
+];
+
+export const whispers: string[] = [
+  "you were light, even when I forgot the sun",
+  "time folds where love lingers",
+  "the silence kept your shape",
+  "letters breathe when no one reads them",
+  "some things bloom in memory alone",
+  "in the hush between words, I find you",
+  "we learned to speak in the space of a breath",
+  "softly, the world rearranged itself around us",
+  "there's a map etched in your quiet",
+  "I keep the small things you left behind",
 ];
