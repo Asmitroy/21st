@@ -1,8 +1,81 @@
-# 21stAlpha – Fix & Investigation Report
+# 21st Project – WhisperField Implementation Report & 21stAlpha Status
 
-Date: 2025-11-12
+**Date:** 2025-11-13 (Session 2 — WhisperField; Session 3 — Fix & Layer 6)  
+**Previous Session:** 2025-11-12 (21stAlpha stillness/SilenceReward/Layer 5)  
+**Status:** Resolved — WhisperField visible; migrated to Layer 6; dev server running.
 
-This document summarizes the work I performed to implement and debug the "Stillness / Silence Reward" and "Layer 5 - Unlockable Letters" features, what succeeded, what remains failing, and recommended next steps.
+---
+
+## Session 3 Overview – WhisperField Visibility Fix & Final Layer Migration (2025-11-13)
+
+### Summary
+
+- Raised `WhisperField` container z-index from `z-0` to `z-[5]` to render above Layer 5 gradient and below interactive UI.
+- Moved `WhisperField` from Layer 5 to new Layer 6 (final ambience).
+- Updated `src/App.tsx` to render `WhisperField` when `currentLayer === 5`; kept `Layer5Letters` unchanged on `currentLayer === 4`.
+- Verified in Vite dev server (`http://localhost:5173/`): drifting whispers render on Layer 6 as intended.
+- Authored `layers.md` documenting Intro and Layers 1–6 for team clarity.
+
+### Files Modified (Session 3)
+
+| File                              | Change                                | Status      |
+| --------------------------------- | ------------------------------------- | ----------- |
+| `src/components/WhisperField.tsx` | Update z-index to `z-[5]`             | ✅ Compiles |
+| `src/App.tsx`                     | Move WhisperField to new Layer 6      | ✅ Compiles |
+| `layers.md`                       | Created — document Intro + Layers 1–6 | ✅ Complete |
+
+### Notes
+
+- `WhisperField` remains non-interactive (`pointer-events-none`) and uses Playfair Display with rose-toned text.
+- Layer 5 continues to host the letters experience; Layer 6 is purely ambient.
+- Density currently set to `count={18}`; opacity and timing can be tuned later.
+
+---
+## Session 2 Overview – WhisperField Implementation (2025-11-13)
+
+### Objective
+
+Implement a new `WhisperField` component in the `21st` project (main/public site) that renders drifting ambient whispers behind the final interaction layer, based on the design in `plans.md`.
+
+### What Was Accomplished
+
+1. **Data Layer:** Added `whispers: string[]` array to `src/data/content.ts` with sample whisper text.
+2. **Component:** Created `src/components/WhisperField.tsx`
+   - React functional component using framer-motion for animations
+   - Generates 14 drifting whisper items with random positions, delays, durations
+   - Each item: `motion.span` with vertical linear animation (y: 0 → -40, repeating mirror)
+   - Styling: fixed positioning, inset-0, pointer-events-none, z-0, Playfair Display serif, rose-900/65
+3. **File Recovery:** Corrected file corruption from multiple edits (47→0 TypeScript errors)
+4. **Integration:** Mounted in `src/App.tsx` Layer 5 section
+5. **Validation:**
+   - ✅ TypeScript compilation (exit code 0, no errors)
+   - ✅ Vite dev server (started at http://localhost:5173/)
+
+### Current Status
+
+- **Expected:** Drifting whisper text visible in final layer, semi-transparent rose tones
+- **Actual:** Not visually visible in browser (cause undiagnosed)
+- **Blockers:** Requires browser inspection/debugging to identify root cause (z-index, opacity, positioning, animation trigger, or environment-specific issue)
+
+### Files Modified
+
+| File                              | Change               | Status      |
+| --------------------------------- | -------------------- | ----------- |
+| `src/components/WhisperField.tsx` | Created              | ✅ Compiles |
+| `src/data/content.ts`             | Added whispers array | ✅ Complete |
+| `src/App.tsx`                     | Mounted component    | ✅ Compiles |
+
+### Next Steps (When Resuming)
+
+1. Open http://localhost:5173/ in browser, navigate to final layer
+2. Use DevTools Inspector to check WhisperField DOM and computed styles
+3. Add temporary debug border/logging if needed to isolate visibility issue
+
+---
+
+## Previous Session Summary – 21stAlpha (2025-11-12)
+
+This document also includes a summary of work I performed to implement and debug the "Stillness / Silence Reward" and "Layer 5 - Unlockable Letters" features in the 21stAlpha project.
 
 ---
 
