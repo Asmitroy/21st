@@ -22,12 +22,30 @@ export const ensureUserVisit = async (userIdentifier: string) => {
 
     if (!data) {
       const nowIso = new Date().toISOString();
-      const { error: insertError } = await supabase.from("user_visits").insert({
-        user_identifier: userIdentifier,
-        first_visit_at: nowIso,
-      });
+      const { error: insertError } = await supabase
+        .from("user_visits")
+        .insert({
+          user_identifier: userIdentifier,
+          first_visit_at: nowIso,
+        });
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        const code = (insertError as any)?.code;
+        if (code !== "23505") {
+          throw insertError;
+        }
+        const { data: existing } = await supabase
+          .from("user_visits")
+          .select("first_visit_at")
+          .eq("user_identifier", userIdentifier)
+          .maybeSingle();
+        if (existing?.first_visit_at) {
+          try {
+            localStorage.setItem("first_visit_date", existing.first_visit_at);
+          } catch (e) {}
+          return new Date(existing.first_visit_at);
+        }
+      }
       try {
         localStorage.setItem("first_visit_date", nowIso);
       } catch (e) {

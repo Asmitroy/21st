@@ -28,7 +28,7 @@ export interface Letter {
   letter_key: string;
   title: string;
   content: string;
-  unlock_type: 'absolute' | 'relative';
+  unlock_type: "absolute" | "relative";
   unlock_date: string;
   position_order: number;
   is_unlocked?: boolean;
@@ -47,4 +47,35 @@ export interface UserLetterState {
   is_opened: boolean;
   is_bookmarked: boolean;
   opened_at?: string;
+}
+
+export interface Lantern {
+  id: string;
+  type: "standard" | "locked" | "golden" | "hidden" | "revelation";
+  title: string;
+  content: string;
+  unlockThreshold?: number;
+  unlockTrigger?: number;
+  revealEffect?: "pulse" | "glow" | "atmosphere-shift" | "skip-layer";
+  revealMessage?: string;
+}
+
+export interface LanternPosition {
+  id: string;
+  y: number;
+  side: "left" | "right";
+  isRevealed: boolean;
+}
+
+export interface RevealedSecret {
+  id: string;
+  revealEffect: string;
+  timestamp: number;
+}
+
+export interface RoadAtmosphere {
+  fogOpacity: number;
+  particleCount: number;
+  skyShade: string;
+  lightIntensity: number;
 }
