@@ -14,7 +14,6 @@ export const getFirstVisitDate = (): Date => {
   if (stored) return new Date(stored);
 
   const now = new Date();
-  now.setDate(now.getDate() + 2);
   localStorage.setItem('first_visit_date', now.toISOString());
   return now;
 };
@@ -33,7 +32,7 @@ export const isLetterUnlocked = (letter: Letter, firstVisitDate?: Date): boolean
     const visitDate = firstVisitDate || getFirstVisitDate();
     const daysToUnlock = parseInt(letter.unlock_date, 10);
     const unlockDate = new Date(visitDate);
-    unlockDate.setDate(unlockDate.getDate() + daysToUnlock);
+    unlockDate.setDate(unlockDate.getDate() + daysToUnlock + 2);
     unlockDate.setHours(0, 0, 0, 0);
     return today >= unlockDate;
   }
@@ -57,7 +56,7 @@ export const getDaysUntilUnlock = (letter: Letter, firstVisitDate?: Date): numbe
     const visitDate = firstVisitDate || getFirstVisitDate();
     const daysToUnlock = parseInt(letter.unlock_date, 10);
     const unlockDate = new Date(visitDate);
-    unlockDate.setDate(unlockDate.getDate() + daysToUnlock);
+    unlockDate.setDate(unlockDate.getDate() + daysToUnlock + 2);
     unlockDate.setHours(0, 0, 0, 0);
     const diffTime = unlockDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -77,7 +76,7 @@ export const formatUnlockDate = (letter: Letter, firstVisitDate?: Date): string 
     const visitDate = firstVisitDate || getFirstVisitDate();
     const daysToUnlock = parseInt(letter.unlock_date, 10);
     const unlockDate = new Date(visitDate);
-    unlockDate.setDate(unlockDate.getDate() + daysToUnlock);
+    unlockDate.setDate(unlockDate.getDate() + daysToUnlock + 2);
     return unlockDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   }
 
