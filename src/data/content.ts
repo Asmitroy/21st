@@ -102,7 +102,7 @@ Asmit.`;
 
 export const promises = [
   "I promise to see you when the world looks away.",
-  "I promise to hold remind you of the sparkle in your eyes when the days are dim.",
+  "I promise to remind you of the sparkle in your eyes when the days are dim.",
   "I promise to make sure you are always on the road to become the best girl you can be.",
   "I promise to help you see through the fogs of life and be a beacon of hope.",
   "I promise that I will help you dream.",
