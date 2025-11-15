@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { promises } from '../data/content';
-import { Circle } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { promises } from "../data/content";
+import { Circle } from "lucide-react";
 
 interface Props {
   onComplete?: () => void;
@@ -21,11 +21,13 @@ export default function Layer4Horizon({ onComplete }: Props) {
   return (
     <div className="min-h-screen relative flex flex-col items-center justify-center px-4 overflow-hidden">
       <motion.div
-        initial={{ background: 'linear-gradient(to bottom, #1e293b, #334155, #64748b)' }}
+        initial={{
+          background: "linear-gradient(to bottom, #1e293b, #334155, #64748b)",
+        }}
         animate={{
           background: showFinal
-            ? 'linear-gradient(to bottom, #fef3c7, #fde68a, #fcd34d)'
-            : 'linear-gradient(to bottom, #312e81, #6366f1, #a5b4fc, #fef3c7)',
+            ? "linear-gradient(to bottom, #fef3c7, #fde68a, #fcd34d)"
+            : "linear-gradient(to bottom, #312e81, #6366f1, #a5b4fc, #fef3c7)",
         }}
         transition={{ duration: 3 }}
         className="absolute inset-0"
@@ -40,7 +42,8 @@ export default function Layer4Horizon({ onComplete }: Props) {
             className="text-center mb-16"
           >
             <p className="text-2xl md:text-4xl text-white font-light leading-relaxed drop-shadow-lg">
-              We've built a thousand little worlds together.<br />
+              We've built a thousand little worlds together.
+              <br />
               Here's to the next one.
             </p>
           </motion.div>
@@ -76,7 +79,11 @@ export default function Layer4Horizon({ onComplete }: Props) {
               >
                 <motion.div
                   animate={{ x: [0, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "easeInOut",
+                  }}
                 >
                   <Circle
                     className="w-24 h-24 text-rose-300"
@@ -86,7 +93,11 @@ export default function Layer4Horizon({ onComplete }: Props) {
                 </motion.div>
                 <motion.div
                   animate={{ x: [0, 10, 0] }}
-                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "easeInOut",
+                  }}
                   className="absolute top-0 left-12"
                 >
                   <Circle
@@ -129,9 +140,10 @@ export default function Layer4Horizon({ onComplete }: Props) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
             className="text-4xl md:text-6xl text-gray-800 font-light mb-8"
-            style={{ fontFamily: 'Playfair Display, serif' }}
+            style={{ fontFamily: "Playfair Display, serif" }}
           >
-            Forever,<br />
+            Forever,
+            <br />
             in every small thing.
           </motion.p>
 
@@ -142,11 +154,13 @@ export default function Layer4Horizon({ onComplete }: Props) {
             className="mt-12"
           >
             <p className="text-xl text-gray-700 italic mb-4">
-              This journey has no end.
+              This journey has always been the destination.
             </p>
             <p className="text-lg text-gray-600 mb-12">
-              Because you are my constant,<br />
-              my light,<br />
+              Because you are my constant,
+              <br />
+              my light,
+              <br />
               my home.
             </p>
             {onComplete && (
