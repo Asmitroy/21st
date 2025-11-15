@@ -85,10 +85,8 @@
 - `src/utils/supabaseClient.ts`: inserts first visit as +2 days for new entries.
 
 ### Supabase Notes
-- No schema changes required in SQL. Existing `user_visits` table supports the offset via application logic.
-- Optional: to retroactively shift existing rows, run an update in Supabase SQL editor:
-  - `UPDATE user_visits SET first_visit_at = first_visit_at + interval '2 days' WHERE first_visit_at IS NOT NULL;`
-  - Only if you need current users’ schedules to reflect the new policy immediately.
+- No schema changes required in SQL. We now apply the +2 days offset only to relative letters at the application level.
+- First visit is recorded as actual current timestamp in `user_visits`.
 
 ### Verification
 - Typecheck passes.
