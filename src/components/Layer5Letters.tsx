@@ -91,6 +91,25 @@ export default function Layer5Letters({
             const unlocked = isLetterUnlocked(letter, firstVisitDate);
             const state = userLetterStates[letter.letter_key] || { is_opened: false, is_bookmarked: false };
             const daysUntil = getDaysUntilUnlock(letter, firstVisitDate);
+            const accent = letter.accent || 'default';
+            const openedClass =
+              accent === 'violet'
+                ? 'bg-gradient-to-br from-purple-100 to-fuchsia-50 border border-purple-200/50'
+                : accent === 'emerald'
+                ? 'bg-gradient-to-br from-emerald-100 to-green-50 border border-emerald-200/50'
+                : 'bg-gradient-to-br from-blue-100 to-cyan-50 border border-blue-200/50';
+            const unlockedClass =
+              accent === 'violet'
+                ? 'bg-white border border-purple-200/50'
+                : accent === 'emerald'
+                ? 'bg-white border border-emerald-200/50'
+                : 'bg-white border border-gray-200/50';
+            const lockedClass =
+              accent === 'violet'
+                ? 'bg-gray-100 border border-purple-200/30'
+                : accent === 'emerald'
+                ? 'bg-gray-100 border border-emerald-200/30'
+                : 'bg-gray-100 border border-gray-200/30';
 
             return (
               <motion.div
@@ -112,12 +131,12 @@ export default function Layer5Letters({
                         ? '0 20px 40px rgba(59, 130, 246, 0.3)'
                         : '0 10px 25px rgba(0, 0, 0, 0.1)',
                     }}
-                    className={`relative w-full h-full rounded-2xl p-6 transition-all ${
+                  className={`relative w-full h-full rounded-2xl p-6 transition-all ${
                       unlocked && state.is_opened
-                        ? 'bg-gradient-to-br from-blue-100 to-cyan-50 border border-blue-200/50'
+                        ? openedClass
                         : unlocked
-                        ? 'bg-white border border-gray-200/50'
-                        : 'bg-gray-100 border border-gray-200/30'
+                        ? unlockedClass
+                        : lockedClass
                     }`}
                   >
                     <div className="flex flex-col h-full justify-between">
@@ -126,7 +145,11 @@ export default function Layer5Letters({
                           <Mail
                             className={`w-6 h-6 ${
                               unlocked && state.is_opened
-                                ? 'text-blue-500'
+                                ? accent === 'violet'
+                                  ? 'text-purple-500'
+                                  : accent === 'emerald'
+                                  ? 'text-emerald-500'
+                                  : 'text-blue-500'
                                 : unlocked
                                 ? 'text-gray-400'
                                 : 'text-gray-300'

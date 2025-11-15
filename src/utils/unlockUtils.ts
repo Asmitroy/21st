@@ -14,6 +14,7 @@ export const getFirstVisitDate = (): Date => {
   if (stored) return new Date(stored);
 
   const now = new Date();
+  now.setDate(now.getDate() + 2);
   localStorage.setItem('first_visit_date', now.toISOString());
   return now;
 };

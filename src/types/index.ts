@@ -34,6 +34,7 @@ export interface Letter {
   is_unlocked?: boolean;
   is_opened?: boolean;
   is_bookmarked?: boolean;
+  accent?: "violet" | "emerald" | "default";
 }
 
 export interface UserVisit {

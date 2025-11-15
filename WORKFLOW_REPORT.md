@@ -65,6 +65,34 @@
 
 ## Status
 - Completed — Layers aligned, lantern rules implemented, secrets gating enforced, timers and counters adjusted, visuals polished, title updated, and docs refreshed.
+
+---
+
+## Update – Relative Letters and First Visit Offset (2025-11-15)
+
+### Changes
+- Added two relative letters that unlock 21 and 42 days after first visit; positioned at the bottom.
+- Styled these two letters with distinct accents (violet and emerald) while keeping the theme.
+- Offset first visit recording by +2 days to satisfy schedule requirements:
+  - Local first visit date set to day after tomorrow.
+  - Supabase `user_visits.first_visit_at` inserted as day after tomorrow for new visitors.
+
+### Files
+- `src/data/letters.ts`: added `letter_rel_21` and `letter_rel_42` with `unlock_type: 'relative'` and accents.
+- `src/types/index.ts`: `Letter.accent?: 'violet' | 'emerald' | 'default'`.
+- `src/components/Layer5Letters.tsx`: accent-based colour mapping; sorted by `position_order` keeps relative letters at bottom.
+- `src/utils/unlockUtils.ts`: first visit date defaults to +2 days.
+- `src/utils/supabaseClient.ts`: inserts first visit as +2 days for new entries.
+
+### Supabase Notes
+- No schema changes required in SQL. Existing `user_visits` table supports the offset via application logic.
+- Optional: to retroactively shift existing rows, run an update in Supabase SQL editor:
+  - `UPDATE user_visits SET first_visit_at = first_visit_at + interval '2 days' WHERE first_visit_at IS NOT NULL;`
+  - Only if you need current users’ schedules to reflect the new policy immediately.
+
+### Verification
+- Typecheck passes.
+- Letters layer shows one immediate letter, absolute-date letters, and two relative letters at the bottom.
 ## Session 3 Overview – WhisperField Visibility Fix & Final Layer Migration (2025-11-13)
 
 ### Summary

@@ -14,11 +14,11 @@ import WhisperField from "./components/WhisperField";
 import { useStillnessDetector } from "./hooks/useStillnessDetector";
 import { generateUserIdentifier } from "./utils/unlockUtils";
 import {
-  fetchLetters,
   fetchUserLetterStates,
   ensureUserVisit,
   updateLetterState,
 } from "./utils/supabaseClient";
+import { localLetters } from "./data/letters";
 import { Letter } from "./types";
 
 function App() {
@@ -37,10 +37,9 @@ function App() {
       const userId = generateUserIdentifier();
       await ensureUserVisit(userId);
 
-      const fetchedLetters = await fetchLetters();
       const fetchedStates = await fetchUserLetterStates(userId);
-
-      setLetters(fetchedLetters);
+      const seededLetters = localLetters;
+      setLetters(seededLetters);
 
       const statesMap = (fetchedStates as any[]).reduce(
         (
@@ -55,7 +54,17 @@ function App() {
         },
         {} as Record<string, { is_opened: boolean; is_bookmarked: boolean }>
       );
-      setUserLetterStates(statesMap);
+      // Ensure defaults for local letters
+      const withDefaults = seededLetters.reduce(
+        (acc, l) => {
+          if (!acc[l.letter_key]) {
+            acc[l.letter_key] = { is_opened: false, is_bookmarked: false };
+          }
+          return acc;
+        },
+        { ...statesMap } as Record<string, { is_opened: boolean; is_bookmarked: boolean }>
+      );
+      setUserLetterStates(withDefaults);
       setIsLoading(false);
     };
 
