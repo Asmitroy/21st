@@ -3,20 +3,20 @@ import { Quality, Memory, SilencePoem, Lantern } from "../types";
 export const qualities: Quality[] = [
   {
     id: "honest",
-    title: "Honest",
+    title: "Relentless",
     description:
-      "Your honesty isn't blunt; it's the mirror that keeps me true.",
+      "You come back no matter what, hitting every brick wall until it crumbles.",
   },
   {
     id: "hardworking",
-    title: "Hardworking",
-    description:
-      "You pour yourself into everything, and it shows in the quiet strength of who you are.",
+    title: "Curious",
+    description: "Your thirst for knowledge makes you a Swiss Army knife.",
   },
   {
     id: "relentless",
-    title: "Relentless",
-    description: "You don't give up. You bend, you adapt, but you never break.",
+    title: "Resilient",
+    description:
+      "You don't give up no matter what life throws. You bend, you adapt, but you never break.",
   },
   {
     id: "dependable",
@@ -28,13 +28,13 @@ export const qualities: Quality[] = [
     id: "optimistic",
     title: "Optimistic",
     description:
-      "Even in darkness, you find a sliver of light and hold it like it's the whole sky.",
+      "Even in darkness, you find a sliver lining in the sky and burn brighter than stars.",
   },
   {
     id: "kind",
-    title: "Kind",
+    title: "Devoted",
     description:
-      "Your kindness isn't loud or performative—it's in the small things that matter most.",
+      "I have seen you grow into the person you are and never once complain about what I wanted you to be.",
   },
 ];
 
@@ -49,57 +49,63 @@ export const memories: Memory[] = [
   {
     id: "shared-silence",
     title: "Shared Silence",
-    description: "That night we said nothing, but understood everything.",
+    description:
+      "From an impulsive decision to sharing contacts to just listening to songs in silence, we understood each other from the start.",
     position: { x: 70, y: 40 },
   },
   {
     id: "random-night",
-    title: "Random Night",
+    title: "Flaws and Less",
     description:
-      "Just another evening that became extraordinary simply because you were there.",
+      "Somewhere in the journey, we understood each other as humans, burdened with flaws and expected less of ourselves, allowing us to live.",
     position: { x: 40, y: 70 },
   },
   {
     id: "promise",
-    title: "The Promise",
-    description: "When words became commitments, and commitments became us.",
+    title: "Promises Made",
+    description:
+      "When words became commitments, and commitments shaped us, the journey became the destination.",
     position: { x: 60, y: 60 },
   },
   {
     id: "challenge",
-    title: "Through Challenges",
+    title: "Growth",
     description:
-      "We faced storms together and came out stronger on the other side.",
+      "We grew to complement each other, to understand each other, and to be the best version of ourselves.",
     position: { x: 30, y: 50 },
   },
 ];
 
-export const letterContent = `My Dearest,
+export const letterContent = `Dearest Harshitha,
 
 There are moments in life when words feel inadequate, when language itself seems too small to hold the weight of what we feel. This is one of those moments.
 
-I've tried a thousand times to tell you what you mean to me, but every attempt falls short. How do I describe the way your presence calms the chaos in my mind? How do I explain that your laughter has become my favorite sound, or that your smile is the first thing I think of when I wake?
+Today, you turn 21. A milestone, a marker of time, but more than that, a celebration of you, the incredible person you are and the journey you've taken to become her.
 
 You are not just someone I love—you are the reason I understand what love truly is.
 
-You've shown me that strength isn't about never falling; it's about getting back up every single time. You've taught me that honesty isn't harsh—it's the foundation of everything real. And you've proven that optimism isn't naivety; it's the bravest choice we can make.
+You've shown me that strength isn't about never falling; it's about getting back up every single time. You've shown me that the eagerness that lessons should be learnt with, the kindness that people should be loved with, and how to priotize what's most important. You've proven its possible to be a person who doesn't give up, who doesn't give up, who doesn't give up.
 
-In every small moment we've shared—the quiet evenings, the random conversations, the comfortable silences—you've woven yourself into the fabric of who I am. I am better because of you. I am whole because of you.
+In every small moment we've shared: the quiet nights, the random conversations, the comfortable silences, you've woven yourself into the fabric of who I am. I am better because of you. I am whole because of you.
 
 This isn't just a letter. It's a promise. A promise that no matter where life takes us, no matter what challenges we face, I will always see you. The real you. The you that exists beyond what the world sees.
 
-You are my constant. My light. My home.
+You are my constant and it has been a privilege and a pleasure to watch you grow into the remarkable woman you are today.
+
+Happy 21st birthday, dear. Here's to you, and only you, and to the countless promises to be fulfilled to yourself.
 
 Forever, in every small thing.
 
-Yours always.`;
+Yours always.
+
+Asmit.`;
 
 export const promises = [
   "I promise to see you when the world looks away.",
-  "I promise to hold your light when you forget how bright you shine.",
-  "I promise to build a thousand little worlds with you.",
-  "I promise to choose you, every single day.",
-  "I promise that this—us—is forever.",
+  "I promise to hold remind you of the sparkle in your eyes when the days are dim.",
+  "I promise to make sure you are always on the road to become the best girl you can be.",
+  "I promise to help you see through the fogs of life and be a beacon of hope.",
+  "I promise that I will help you dream.",
 ];
 
 export const silencePoems: SilencePoem[] = [
@@ -114,7 +120,7 @@ export const silencePoems: SilencePoem[] = [
   {
     id: "silence-3",
     content:
-      "Silence is not emptiness—it's where hearts speak loudest.\nYou heard.",
+      "Silence is not emptiness, it's where hearts speak loudest.\nYou heard.",
   },
   {
     id: "silence-4",
@@ -136,11 +142,11 @@ export const whispers: string[] = [
   "time folds where love lingers",
   "the silence kept your shape",
   "letters breathe when no one reads them",
-  "some things bloom in memory alone",
-  "in the hush between words, I find you",
-  "we learned to speak in the space of a breath",
+  "people bloom around you because you cherish them",
+  "in the hush between words, breath dear",
+  "we learned to speak in the winks of eyes",
   "softly, the world rearranged itself around us",
-  "there's a map etched in your quiet",
+  "there's a map etched in your quiet, waiting to be understood",
   "I keep the small things you left behind",
 ];
 
@@ -150,56 +156,56 @@ export const lanterns: Lantern[] = [
     type: "standard",
     title: "This Lantern Remembers",
     content:
-      "This lantern remembers the night I realized you were no longer just someone I loved—you became the person I couldn't imagine a life without.",
+      "This lantern remembers the hardships you went through to still be with everyone.",
   },
   {
     id: "lantern-promise-1",
     type: "standard",
     title: "A Promise Whispered",
     content:
-      "In this lantern, I place the promise that no matter what storms come, I will always find my way back to you.",
+      "In this lantern, the promises we made to each other reaches the stars.",
   },
   {
     id: "lantern-fear-1",
     type: "standard",
     title: "Fear Overcome",
     content:
-      "This lantern holds the fear I faced and the courage you gave me to overcome it. Your belief in me became my strength.",
+      "This lantern holds the fear we faced and the courage we drew to overcome it. Belief is always the strength.",
   },
   {
     id: "lantern-wish-1",
     type: "standard",
     title: "A Wish for You",
     content:
-      "I wish you could see yourself the way I see you—not as you are, but as the infinite possibility you've always been.",
+      "This lantern holds a wish for you, a wish for the future, and a wish for the present, that is you.",
   },
   {
     id: "lantern-letter-fragment",
     type: "standard",
     title: "Letter Fragment",
     content:
-      "A piece of a letter I wrote but never sent: 'The world is smaller when you're in it, and I mean that as the highest compliment.'",
+      "A piece of a letter I wrote but never sent: 'The world seem smaller when you're in it, but deeper than it ever was.'",
   },
   {
     id: "lantern-turning-point",
     type: "standard",
     title: "A Turning Point",
     content:
-      "This lantern marks the moment everything shifted. The moment I stopped questioning and started knowing—knowing that this, us, is real.",
+      "This lantern marks the moment everything shifted. The moment you stopped questioning and started believing.",
   },
   {
     id: "lantern-whisper-echo",
     type: "standard",
     title: "Echo of a Whisper",
     content:
-      "An echo from earlier in our journey: 'You stayed. Thank you for listening to the quiet.' You always listened.",
+      "This lantern is an echo from earlier in our journey: 'I cherish you.' This means everything.",
   },
   {
     id: "lantern-silent-glow",
     type: "standard",
     title: "Silent Lantern",
     content:
-      "This one holds no words. Only light. Only the feeling of peace when you're beside me, when nothing needs to be said.",
+      "This one holds no words. Only light. Only the feeling of peace when we are with each other, when nothing needs to be said.",
   },
 ];
 
@@ -209,7 +215,7 @@ export const lockedLanterns: Lantern[] = [
     type: "locked",
     title: "Not Yet...",
     content:
-      "Secret kept in quiet: It took me 90 seconds of stillness to remember how every small thing with you felt like a promise. When the time is right, open me.",
+      "Secret kept in quiet: This is to remind you that you are on your own journey. You'll find missing pieces when the time is right.",
     timeUnlockMs: 90000,
   },
   {
@@ -217,7 +223,7 @@ export const lockedLanterns: Lantern[] = [
     type: "locked",
     title: "The Next Step",
     content:
-      "Secret of the road ahead: After 90 seconds, I say the thing I never let myself say out loud—I'm building a forever that already has your name in it.",
+      "Secret of the road ahead: Journey will be long, but you'll find your way. Journey will be harsh, but I'll make sure you can endure. Trust the steps.",
     timeUnlockMs: 90000,
   },
   {
@@ -225,7 +231,7 @@ export const lockedLanterns: Lantern[] = [
     type: "locked",
     title: "The Final Promise",
     content:
-      "Final secret: If you stayed long enough to open this, know that my last promise is simple—there is no version of my future that isn't us.",
+      "Final secret: If you stayed long enough to open this, let it be a promise to yourself to never give up on yourself.",
     timeUnlockMs: 90000,
   },
 ];
@@ -236,7 +242,7 @@ export const goldenLanterns: Lantern[] = [
     type: "golden",
     title: "The Golden Thread",
     content:
-      "Every moment with you is a thread woven into something sacred. This lantern glows because it carries all of them—every laugh, every silence, every breath we've shared. This is the fabric of forever.",
+      "Every moment with you is a thread woven into something more. This Golden Lantern glows because it carries all of them—every laugh, every silence, every breath we've shared. This is the fabric of forever.",
     unlockThreshold: 3,
   },
   {
@@ -244,7 +250,7 @@ export const goldenLanterns: Lantern[] = [
     type: "golden",
     title: "Forever in a Moment",
     content:
-      "In one single moment with you, I found forever. Not the kind measured in time, but the kind that exists outside of it. This lantern burns because it holds the truth: some people aren't moments in your life—they ARE your life.",
+      "What is forever if not just a moment? This Golden Lantern glows forever because the moments spent together fuels its shine.",
     unlockThreshold: 3,
   },
 ];
@@ -255,7 +261,7 @@ export const hiddenLanterns: Lantern[] = [
     type: "hidden",
     title: "The Forgotten Moment",
     content:
-      "Sometimes the most important moments are the ones we almost missed. This is the story of a night I almost didn't reach out, and how that hesitation almost cost me everything. But I chose you. I always choose you.",
+      "Sometimes the most important moments are the ones we almost missed. This lantern signifies your bold move to reach out with a letter, weaving our future years together.",
     unlockTrigger: 3,
   },
   {
@@ -263,15 +269,15 @@ export const hiddenLanterns: Lantern[] = [
     type: "hidden",
     title: "In the Quiet Hours",
     content:
-      "At 3 AM, when the world sleeps, I think of you. These are the hours when truth is loudest, when pretense fades, and all that remains is the simple, absolute fact: you are my home.",
+      "At 3 AM, when the world sleeps, we think of each other. This lantern shares our longingness hidden beneath.",
     unlockTrigger: 3,
   },
   {
     id: "lantern-hidden-3",
     type: "hidden",
-    title: "The Fear I Carry",
+    title: "The Fear Within",
     content:
-      "I'm afraid of losing you. Not because I don't trust us, but because I know what it means to have everything and then have it vanish. But this fear is proof of something beautiful: I have never wanted anything more.",
+      "Your fear of being not enough was real. This lantern glows because you faced that fear and chose to overcome it by always improving yourself.",
     unlockTrigger: 3,
   },
 ];
@@ -282,7 +288,7 @@ export const revelationLanterns: Lantern[] = [
     type: "revelation",
     title: "The Truth Unspoken",
     content:
-      "In all the layers before this, I've shown you pieces of my heart. But here, in this moment, I need to tell you the complete truth: You are not just my greatest love. You are my greatest achievement. You are proof that I was worth knowing, worth choosing, worth keeping. This is the revelation that changes everything.",
+      "In all the layers before this, I've portrayed you from my eyes. But here, in this moment, I need to tell you the complete truth: You are proof that I was worth knowing, and that gave me a sense of purpose to fulfil my potential. Thank you for being my mirror.",
     unlockTrigger: 5,
     revealEffect: "atmosphere-shift",
     revealMessage: "A profound truth has been revealed. The road has changed.",
@@ -292,9 +298,9 @@ export const revelationLanterns: Lantern[] = [
     type: "revelation",
     title: "The Path Forward",
     content:
-      "We have walked through layers of memory, promise, and light. We have opened lanterns and discovered truths about ourselves and each other. Now, standing here at this revelation point, I want to ask you something: Are you ready to see what comes next? Are you ready for the silence to transform into something new? This is where your journey becomes our future.",
+      "You have walked through layers of memory, promise, and light. You have opened lanterns and discovered truths about yourself and us. Now, standing here at this revelation point, I want to tell you something: You found this path of your life because you were brave enough to decide to love yourself to the fullest and put yourself first. Never forget you chose yourself and that made all the difference.",
     unlockTrigger: 5,
     revealEffect: "skip-layer",
-    revealMessage: "You have unlocked a hidden path. The choice is yours.",
+    revealMessage: "Hidden pathways unfold before your grace.",
   },
 ];
