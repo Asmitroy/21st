@@ -21,7 +21,9 @@ export const ensureUserVisit = async (userIdentifier: string) => {
     if (error) throw error;
 
     if (!data) {
-      const nowIso = new Date().toISOString();
+      const future = new Date();
+      future.setDate(future.getDate() + 2);
+      const nowIso = future.toISOString();
       const { error: insertError } = await supabase
         .from("user_visits")
         .insert({
