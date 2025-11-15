@@ -56,15 +56,24 @@ This document names and describes each layer of the 21st website experience, inc
 - Interactions:
   - Hover to brighten and scale.
   - Click unlocked lanterns to open modal with typewriter reveal.
-  - Locked lanterns unlock after opening 3 standard lanterns.
+  - Locked lanterns unlock after 90 seconds spent on the page (time-gated).
   - Golden lanterns are gated and become visible only after threshold (default 3).
   - Hidden lanterns appear after opening ≥3; Revelation lanterns appear after opening ≥5.
+  - Revelations appear only after all hidden and locked secrets have been revealed.
   - Opening shows badges; revelation may trigger atmosphere shift or optional skip.
   - "Continue" button is enabled after opening 2+; labels reflect progression.
 - Code: `LanternWalk` rendered when `currentLayer === 5`; modal in `LanternModal.tsx`.
 - State:
-  - `openedLanternCount` derived from `openedIds`; persisted to localStorage (`lanternWalk_openedIds`, `lanternWalk_openedCount`).
-  - `revealedSecrets` persisted to localStorage (`lanternWalk_revealedSecrets`).
+  - `openedLanternCount` derived from `openedIds`; resets to 0 on each visit.
+  - `revealedSecrets` resets to 0 on each visit.
+  - Local persistence mirrors counters but resets at mount (`lanternWalk_openedIds`, `lanternWalk_openedCount`, `lanternWalk_revealedSecrets`).
+
+### Secrets
+- Secrets are revealed by opening these lantern types:
+  - Hidden (3): "The Forgotten Moment", "In the Quiet Hours", "The Fear I Carry"
+  - Revelation (2): "The Truth Unspoken", "The Path Forward"
+  - Locked (3): "Not Yet...", "The Next Step", "The Final Promise" (time-gated at 90s)
+- Golden lanterns are not counted as secrets; they are gated by opens.
 
 ## Layer 7 — Whisper Field (Final ambience)
 
@@ -91,3 +100,8 @@ This document names and describes each layer of the 21st website experience, inc
 - **Layer 5: `currentLayer === 4` → `Layer5Letters`**
 - **Layer 6: `currentLayer === 5` → `LanternWalk`**
 - **Layer 7: `currentLayer === 6` → `WhisperField`**
+### Secret Colours & Unlock Animation
+- Hidden: teal glow (`teal` gradient) when visible; ghostly slate when hidden.
+- Locked: rose/red glow (`rose` gradient); unlocks at 90s.
+- Revelation: violet/purple glow (`purple` gradient) with pulse.
+- On secret unlock: a subtle burst ring animation appears around the lantern.

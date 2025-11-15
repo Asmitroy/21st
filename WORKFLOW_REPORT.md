@@ -6,6 +6,65 @@
 
 ---
 
+# Workflow Summary — 21st (For You)
+
+## Scope
+- Align layer order: Letters before Lantern Walk; Whisper Field final.
+- Implement Lantern Walk progression and gating rules.
+- Fix runtime issues (update-depth warning, Supabase duplicate key).
+- Add visual polish (secret colours, unlock animation).
+- Refresh counters on visit; adjust timers.
+- Update documentation and site title.
+
+## Final Layer Order
+- Layer 4 (`currentLayer === 3`): `Layer4Horizon`
+- Layer 5 (`currentLayer === 4`): `Layer5Letters`
+- Layer 6 (`currentLayer === 5`): `LanternWalk`
+- Layer 7 (`currentLayer === 6`): `WhisperField`
+
+## Lantern Walk Mechanics
+- Opened count: derived from `openedIds`; resets to 0 on each visit.
+- Secrets revealed: tracks openings of `hidden`, `locked`, and `revelation` lanterns; resets to 0 on each visit.
+- Golden lanterns: gated by opens (`unlockThreshold` default 3); not counted as secrets.
+- Hidden lanterns: visible after `openedCount >= 3`.
+- Locked lanterns: time-gated; unlock after 90 seconds on page.
+- Revelations: appear only after all hidden and locked secrets are revealed; special pulse effect; may trigger atmosphere shift or optional skip button.
+
+## Visuals & Animation
+- Secret type colours:
+  - Hidden: teal glow (visible), ghostly slate when not yet visible.
+  - Locked: rose/red glow.
+  - Revelation: violet/purple glow with pulse.
+  - Golden: yellow gradient.
+- Unlock animation: subtle burst ring appears around lantern for ~1.2s when a secret unlocks.
+- Parallax atmosphere shifts with revealed secrets.
+
+## Runtime Fixes
+- Maximum update depth warning: memoized lantern arrays/maps to stabilize `useEffect` dependencies in Lantern Walk.
+- Supabase duplicate key (user_visits): insert now catches `23505` and returns existing `first_visit_at` without error.
+
+## Timers & Persistence
+- Locked timer: 90 seconds; enables locked lanterns after elapsed.
+- Local persistence mirrors state but resets on mount:
+  - `lanternWalk_openedIds` → []
+  - `lanternWalk_openedCount` → 0
+  - `lanternWalk_revealedSecrets` → []
+- `first_visit_date` remains persisted for visit tracking.
+
+## Site Title
+- Updated title to `For You` in `index.html`.
+
+## Documentation
+- `layers.md`: updated layer order, secret colours, gating rules, 90s lock timer, and counter resets.
+- `WORKFLOW_REPORT.md`: appended detailed section summarizing the re-alignment and fixes.
+
+## Verification
+- Typecheck: passes (`npm run typecheck`).
+- Dev server: runs (`npm run dev`) and serves at local port.
+- Lint: pre-existing issues remain elsewhere; changes verified functionally.
+
+## Status
+- Completed — Layers aligned, lantern rules implemented, secrets gating enforced, timers and counters adjusted, visuals polished, title updated, and docs refreshed.
 ## Session 3 Overview – WhisperField Visibility Fix & Final Layer Migration (2025-11-13)
 
 ### Summary
@@ -318,6 +377,54 @@ Tell me which follow-up you'd like (manual trigger vs deeper telemetry vs I stop
 - Removed the on-screen debug "Test Silence Reward" button from `src/App.tsx`. The keyboard shortcuts (`Shift+S` / `Shift+X`) remain available for quick testing.
 - Added `SequenceTransition` (`src/components/SequenceTransition.tsx`) — a short sparkle overlay that runs between layer transitions. `App.tsx` now triggers this overlay via `handleLayerComplete` and advances the layer when the overlay completes.
 - Improved `ParticleBackground.tsx`: added devicePixelRatio scaling, responsive resize handling, and increased particle count/visibility. The canvas is set behind the UI (z-index: -1) to avoid covering overlays.
+
+---
+
+# Workflow – Lantern Walk and Letters Alignment (2025-11-15)
+
+## Summary
+- Reordered layers so Letters precede Lantern Walk.
+- Fixed lantern visibility and progression rules (golden/hidden/revelation).
+- Resolved Supabase duplicate-key error for `user_visits`.
+- Eliminated render-loop warnings by stabilizing memoized dependencies.
+
+## Layer Order — Final
+- Layer 4 (`currentLayer === 3`): `Layer4Horizon`
+- Layer 5 (`currentLayer === 4`): `Layer5Letters`
+- Layer 6 (`currentLayer === 5`): `LanternWalk`
+- Layer 7 (`currentLayer === 6`): `WhisperField`
+
+## Changes Implemented
+- App routing:
+  - Letters moved to `currentLayer === 4` and gated by `isLoading` in `src/App.tsx`.
+  - Lantern Walk moved to `currentLayer === 5`.
+- LanternWalk logic:
+  - `openedLanternCount` resets and derives from `openedIds` on each visit.
+  - Golden lanterns visible only after `unlockThreshold` (default 3).
+  - Hidden appear at ≥3 opens; Revelation at ≥5 opens.
+  - Arrays/maps memoized to avoid `useEffect` dependency churn.
+- Supabase `user_visits`:
+  - Insert now catches code `23505` (unique violation) and returns existing date.
+
+## Keys and Persistence
+- `lanternWalk_openedIds`: JSON array of opened standard lantern IDs.
+- `lanternWalk_openedCount`: numeric mirror of `openedIds.length`.
+- `lanternWalk_revealedSecrets`: JSON array of revealed secret IDs.
+- `first_visit_date`: ISO string of initial visit.
+
+## Unlock Thresholds
+- Locked: time-gated at `timeUnlockMs = 45000` (visible but disabled until elapsed).
+- Golden: invisible until `openedCount >= unlockThreshold` (default 3).
+- Hidden: invisible until `openedCount >= 3`.
+- Revelation: invisible until `openedCount >= 5`; may trigger atmosphere shift or skip.
+
+## Verification
+- Typecheck: `npm run typecheck` — passed.
+- Dev server: `npm run dev` — running at http://localhost:5174/.
+- Lint: contains existing unrelated errors; functional changes verified.
+
+## Status
+- Completed — Layers aligned, golden lanterns gated, runtime warnings resolved, Supabase visit insert hardened, and time-based locked secrets added.
 - Enhanced `SilenceReward.tsx` with a sparkle burst on poem change (small radial sparkles) in addition to the existing falling-petal animation.
 
 These changes were tested with the dev server (Vite) and TypeScript typecheck. If you want any of the debug helpers reintroduced (temporary test button or additional logging), I can add them behind a debug flag so they aren't visible in normal runs.

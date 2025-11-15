@@ -56,6 +56,7 @@ export interface Lantern {
   content: string;
   unlockThreshold?: number;
   unlockTrigger?: number;
+  timeUnlockMs?: number;
   revealEffect?: "pulse" | "glow" | "atmosphere-shift" | "skip-layer";
   revealMessage?: string;
 }

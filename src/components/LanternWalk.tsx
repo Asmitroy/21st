@@ -39,6 +39,8 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
   );
   const [showSkipButton, setShowSkipButton] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [timeUnlocked, setTimeUnlocked] = useState(false);
+  const [recentlyUnlocked, setRecentlyUnlocked] = useState<Set<string>>(new Set());
 
   // All lanterns combined
   const allLanterns = useMemo(
@@ -58,17 +60,12 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
 
   // Initialize positions and load from localStorage
   useEffect(() => {
-    const savedIdsRaw = localStorage.getItem("lanternWalk_openedIds");
-    const savedSecretsRaw = localStorage.getItem("lanternWalk_revealedSecrets");
-
-    const idsArray: string[] = savedIdsRaw ? JSON.parse(savedIdsRaw) : [];
-    const idsSet = new Set(idsArray);
-    setOpenedIds(idsSet);
-    setOpenedCount(idsArray.length);
-
-    if (savedSecretsRaw) setRevealedSecrets(new Set(JSON.parse(savedSecretsRaw)));
-
-    localStorage.setItem("lanternWalk_openedCount", idsArray.length.toString());
+    setOpenedIds(new Set());
+    setOpenedCount(0);
+    setRevealedSecrets(new Set());
+    localStorage.setItem("lanternWalk_openedIds", JSON.stringify([]));
+    localStorage.setItem("lanternWalk_openedCount", "0");
+    localStorage.setItem("lanternWalk_revealedSecrets", JSON.stringify([]));
 
     const userId = localStorage.getItem("lanternWalk_userId") || "default";
     const generatedPositions = generateRoadPositions(allLanterns, userId);
@@ -78,6 +75,11 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
       localStorage.setItem("lanternWalk_userId", userId);
     }
   }, [allLanterns]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setTimeUnlocked(true), 90000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   // Update atmosphere when secrets revealed
   useEffect(() => {
@@ -92,7 +94,7 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
     setShowSkipButton(hasSkipLayer);
   }, [revealedSecrets, lanternMap]);
 
-  // Determine visible lanterns based on openedCount
+  // Determine visible lanterns based on openedCount and secrets gating
   useEffect(() => {
     const visible = new Set<string>();
     allLanterns.forEach((lantern) => {
@@ -100,15 +102,19 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
         visible.add(lantern.id);
       }
     });
+
+    // Gate revelations: only appear when all non-revelation secrets are revealed
+    const nonRevSecrets = [...lockedLanterns, ...hiddenLanterns].map((l) => l.id);
+    const allNonRevRevealed = nonRevSecrets.every((id) => revealedSecrets.has(id));
+    if (!allNonRevRevealed) {
+      revelationLanterns.forEach((l) => visible.delete(l.id));
+    }
+
     setVisibleLanterns(visible);
-  }, [openedCount, allLanterns]);
+  }, [openedCount, allLanterns, revealedSecrets]);
 
   const handleLanternClick = (lantern: Lantern) => {
-    // Check if locked
-    if (
-      lantern.type === "locked" &&
-      openedCount < (lantern.unlockThreshold || 3)
-    ) {
+    if (lantern.type === "locked" && !timeUnlocked) {
       return;
     }
 
@@ -137,7 +143,9 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
 
     // Track revealed secrets
     if (
-      (lantern.type === "revelation" || lantern.type === "hidden") &&
+      (lantern.type === "revelation" ||
+        lantern.type === "hidden" ||
+        lantern.type === "locked") &&
       !revealedSecrets.has(lantern.id)
     ) {
       const newSecrets = new Set(revealedSecrets);
@@ -147,6 +155,17 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
         "lanternWalk_revealedSecrets",
         JSON.stringify(Array.from(newSecrets))
       );
+
+      const newRecent = new Set(recentlyUnlocked);
+      newRecent.add(lantern.id);
+      setRecentlyUnlocked(newRecent);
+      setTimeout(() => {
+        setRecentlyUnlocked((prev) => {
+          const next = new Set(prev);
+          next.delete(lantern.id);
+          return next;
+        });
+      }, 1500);
     }
   };
 
@@ -245,14 +264,13 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
               return null;
             }
 
-            const isLocked =
-              lantern.type === "locked" &&
-              openedCount < (lantern.unlockThreshold || 3);
+            const isLocked = lantern.type === "locked" && !timeUnlocked;
             const isOpened = openedIds.has(lantern.id);
             const isSecret = revealedSecrets.has(lantern.id);
             const isHidden = lantern.type === "hidden";
             const isRevelation = lantern.type === "revelation";
             const isGolden = lantern.type === "golden";
+            const justUnlocked = recentlyUnlocked.has(lantern.id);
 
             const xOffset = item.side === "left" ? "35%" : "65%";
 
@@ -285,8 +303,10 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
                       ? "bg-gradient-to-b from-yellow-200 to-yellow-400 shadow-yellow-300/50"
                       : isHidden && !isVisible
                       ? "bg-gradient-to-b from-slate-400/40 to-slate-500/40 shadow-slate-600/30"
-                      : isLocked
-                      ? "bg-gradient-to-b from-rose-900/40 to-rose-800/40 shadow-rose-900/50"
+                      : isHidden
+                      ? "bg-gradient-to-b from-teal-200 to-teal-400 shadow-teal-400/50"
+                      : lantern.type === "locked"
+                      ? "bg-gradient-to-b from-rose-200 to-rose-400 shadow-rose-400/50"
                       : isOpened
                       ? "bg-gradient-to-b from-rose-200 to-rose-300 shadow-rose-400/50"
                       : "bg-gradient-to-b from-rose-100 to-amber-100 shadow-rose-300/50"
@@ -310,6 +330,10 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
                         ? "from-purple-300 to-purple-500"
                         : isGolden
                         ? "from-yellow-300 to-yellow-500"
+                        : isHidden
+                        ? "from-teal-300 to-teal-500"
+                        : lantern.type === "locked"
+                        ? "from-rose-300 to-rose-500"
                         : "from-rose-300 to-amber-200"
                     }`}
                   />
@@ -324,8 +348,10 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
                           ? "text-yellow-900/80"
                           : isHidden && !isVisible
                           ? "text-slate-600/50"
-                          : isLocked
-                          ? "text-rose-700/50"
+                          : isHidden
+                          ? "text-teal-900/80"
+                          : lantern.type === "locked"
+                          ? "text-rose-900/80"
                           : "text-rose-900/70"
                       }`}
                     >
@@ -348,6 +374,16 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
                       animate={{ opacity: [0, 0.5, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-lg"
+                    />
+                  )}
+
+                  {/* Unlock burst animation */}
+                  {justUnlocked && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: [0, 1, 0], scale: [0.8, 1.3, 1.6] }}
+                      transition={{ duration: 1.2 }}
+                      className="absolute -inset-2 rounded-xl ring-2 ring-white/70"
                     />
                   )}
                 </motion.div>
@@ -381,7 +417,7 @@ export const LanternWalk = ({ onComplete }: LanternWalkProps) => {
                     whileHover={{ opacity: 1 }}
                     className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-rose-900/90 text-rose-100 px-3 py-2 rounded-lg text-xs whitespace-nowrap font-playfair z-50 pointer-events-none"
                   >
-                    Open {lantern.unlockThreshold! - openedCount} more
+                    Unlocks after time on page
                   </motion.div>
                 )}
 

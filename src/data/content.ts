@@ -209,24 +209,24 @@ export const lockedLanterns: Lantern[] = [
     type: "locked",
     title: "Not Yet...",
     content:
-      "This lantern waits. It holds something deeper, something meant for later in your journey. Keep walking.",
-    unlockThreshold: 3,
+      "Secret kept in quiet: It took me 90 seconds of stillness to remember how every small thing with you felt like a promise. When the time is right, open me.",
+    timeUnlockMs: 90000,
   },
   {
     id: "lantern-locked-2",
     type: "locked",
     title: "The Next Step",
     content:
-      "When you're ready, this lantern will reveal what you need to know. Trust the timing. Trust yourself.",
-    unlockThreshold: 3,
+      "Secret of the road ahead: After 90 seconds, I say the thing I never let myself say out loud—I'm building a forever that already has your name in it.",
+    timeUnlockMs: 90000,
   },
   {
     id: "lantern-locked-3",
     type: "locked",
     title: "The Final Promise",
     content:
-      "This lantern holds the final promise—the one that will reframe everything you've seen before. Unlock it when the time is right.",
-    unlockThreshold: 3,
+      "Final secret: If you stayed long enough to open this, know that my last promise is simple—there is no version of my future that isn't us.",
+    timeUnlockMs: 90000,
   },
 ];
 
