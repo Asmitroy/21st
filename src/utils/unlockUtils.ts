@@ -1,5 +1,10 @@
 import { Letter } from '../types';
 
+const parseAbsoluteLocal = (isoDate: string): Date => {
+  const [y, m, d] = isoDate.split('-').map((v) => parseInt(v, 10));
+  return new Date(y, m - 1, d);
+};
+
 export const generateUserIdentifier = (): string => {
   const stored = localStorage.getItem('user_identifier');
   if (stored) return stored;
@@ -23,7 +28,7 @@ export const isLetterUnlocked = (letter: Letter, firstVisitDate?: Date): boolean
   today.setHours(0, 0, 0, 0);
 
   if (letter.unlock_type === 'absolute') {
-    const unlockDate = new Date(letter.unlock_date);
+    const unlockDate = parseAbsoluteLocal(letter.unlock_date);
     unlockDate.setHours(0, 0, 0, 0);
     return today >= unlockDate;
   }
@@ -45,7 +50,7 @@ export const getDaysUntilUnlock = (letter: Letter, firstVisitDate?: Date): numbe
   today.setHours(0, 0, 0, 0);
 
   if (letter.unlock_type === 'absolute') {
-    const unlockDate = new Date(letter.unlock_date);
+    const unlockDate = parseAbsoluteLocal(letter.unlock_date);
     unlockDate.setHours(0, 0, 0, 0);
     const diffTime = unlockDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -68,7 +73,7 @@ export const getDaysUntilUnlock = (letter: Letter, firstVisitDate?: Date): numbe
 
 export const formatUnlockDate = (letter: Letter, firstVisitDate?: Date): string => {
   if (letter.unlock_type === 'absolute') {
-    const date = new Date(letter.unlock_date);
+    const date = parseAbsoluteLocal(letter.unlock_date);
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   }
 

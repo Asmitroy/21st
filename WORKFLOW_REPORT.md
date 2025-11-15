@@ -91,6 +91,12 @@
 ### Verification
 - Typecheck passes.
 - Letters layer shows one immediate letter, absolute-date letters, and two relative letters at the bottom.
+
+### Fix – Absolute Date Shift
+- Absolute letters were appearing shifted due to timezone parsing of `YYYY-MM-DD`.
+- Implemented local date-only parsing for absolute unlock dates:
+  - Build `Date(year, monthIndex, day)` so unlock checks and display are timezone-safe.
+- No Supabase SQL changes required.
 ## Session 3 Overview – WhisperField Visibility Fix & Final Layer Migration (2025-11-13)
 
 ### Summary
