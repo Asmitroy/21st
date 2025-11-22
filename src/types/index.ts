@@ -35,6 +35,7 @@ export interface Letter {
   is_opened?: boolean;
   is_bookmarked?: boolean;
   accent?: "violet" | "emerald" | "default";
+  relative_offset_days?: number;
 }
 
 export interface UserVisit {
