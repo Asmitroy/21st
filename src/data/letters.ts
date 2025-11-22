@@ -14,7 +14,7 @@ export const localLetters: Letter[] = [
     letter_key: "letter_2025_11_23",
     title: "On Waiting With Grace",
     content:
-      "Waiting is not absence; it is a quiet room where hope learns to breathe. I have waited for you in gentle ways—by tending to small joys, by keeping promises to myself, by believing that time is a friend. In that waiting, I learned that love doesn’t arrive to rescue us; it arrives to remind us that we were whole all along. When this letter opens, know that I kept faith. I kept my heart ready. And I kept you close in the careful corners of my days.",
+      "As our relation progressed, patience became the best virtue we could afford. We found out that waiting was not absence; it's a quiet room where we hold each other in our memories. In the moments of waiting, both of us have found peace with the fact that time is a friend, and the void it left between us? More often than not, we have decorated that space with altars of ourselves.",
     unlock_type: "absolute",
     unlock_date: "2025-11-23",
     position_order: 2,
@@ -23,7 +23,7 @@ export const localLetters: Letter[] = [
     letter_key: "letter_2025_11_30",
     title: "The Small Things That Saved Me",
     content:
-      "It was never grand gestures that held me together. It was the way you asked how I slept, the way you remembered my favorite tea, the way you stayed when I had no words. The small things saved me: notes tucked into mornings, laughter folded into evenings, the kindness you offered without ceremony. Love lives in these quiet places, and I find it again whenever I think of you. If this letter feels familiar, it’s because you wrote it with me—one small grace at a time.",
+      "It was never grand gestures that held me together. It was the way you asked how I slept, the way you remembered my important moments, the way you stayed when I had no words. The small things saved me: texts tucked into mornings, laughter folded into nights. Love lives in these quiet places, and it wll always find us in the quiet spaces. If this letter feels familiar, it’s because you wrote it with me—one small grace at a time.",
     unlock_type: "absolute",
     unlock_date: "2025-11-30",
     position_order: 3,
@@ -32,7 +32,7 @@ export const localLetters: Letter[] = [
     letter_key: "letter_2025_12_07",
     title: "What Courage Looks Like",
     content:
-      "Courage does not announce itself. It shows up softly, in the choice to keep speaking kindly, in the decision to keep believing, in the steady work of becoming. You showed me that courage is waking each day and choosing love without guarantees, without perfect conditions, without fear defining the story. When I doubted, you reminded me of the truth: we are allowed to grow, to make mistakes, to return to the light. And together, we do the bravest thing—stay.",
+      "Courage does not announce itself. It shows up softly, in the choice to keep speaking kindly, in the decision to keep believing, in the steady work of becoming the peace you never had. You proved that courage is waking up each day and choosing love without guarantees, without perfect conditions, without fear defining the story. When I doubted, you reminded me of the truth: we are allowed to grow, to make mistakes, to return to the light. And together, we do the bravest thing—keep going.",
     unlock_type: "absolute",
     unlock_date: "2025-12-07",
     position_order: 4,
@@ -82,6 +82,7 @@ export const localLetters: Letter[] = [
     unlock_date: "21",
     position_order: 99,
     accent: "violet",
+    relative_offset_days: 2,
   },
   {
     letter_key: "letter_rel_42",
@@ -92,5 +93,6 @@ export const localLetters: Letter[] = [
     unlock_date: "42",
     position_order: 100,
     accent: "emerald",
+    relative_offset_days: 2,
   },
 ];

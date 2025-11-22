@@ -97,6 +97,11 @@
 - Implemented local date-only parsing for absolute unlock dates:
   - Build `Date(year, monthIndex, day)` so unlock checks and display are timezone-safe.
 - No Supabase SQL changes required.
+
+### Update – Relative Offset Targeted
+- Immediate letter (relative `0`) was delayed on fresh devices due to a global +2-day relative offset.
+- Added `relative_offset_days` to `Letter` type so offsets apply only to targeted relative letters.
+- Set `relative_offset_days: 2` for the 21-day and 42-day letters; immediate letter remains truly immediate.
 ## Session 3 Overview – WhisperField Visibility Fix & Final Layer Migration (2025-11-13)
 
 ### Summary
